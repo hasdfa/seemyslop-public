@@ -7,7 +7,7 @@ description: Use when a user explicitly asks to showcase, publish, upload remote
 
 ## Overview
 
-Publish requested files or static web output through `npx seemyslop`. SeeMySlop links are public and unlisted unless eligible password protection is explicitly requested.
+Publish requested files or static web output through `npx --yes seemyslop@0.1.0`. SeeMySlop links are public and unlisted unless eligible password protection is explicitly requested.
 
 ## Workflow
 
@@ -19,15 +19,15 @@ Publish requested files or static web output through `npx seemyslop`. SeeMySlop 
    - **Buildable app:** Read `packageManager`, lockfiles, build scripts, and framework config. Run the existing locked install only when dependencies are missing, then the existing build command. Deploy only the configured or uniquely identified static output (`dist`, `build`, or `out`). A normal Next.js `.next` directory is not static output.
    - **Built directory:** Deploy it directly.
 4. Inspect the final deployment directory again. Exclude source, dependency trees, caches, source maps, environment files, and credentials. Do not upload source when a build fails.
-5. Determine the artifact ID. Reuse an ID supplied by the user, parsed from a prior SeeMySlop URL, already known in the task, or uniquely matched by both repository and source path from `npx seemyslop artifacts --json`. Never guess from title alone. Omit `--id` when no reliable match exists.
+5. Determine the artifact ID. Reuse an ID supplied by the user, parsed from a prior SeeMySlop URL, already known in the task, or uniquely matched by both repository and source path from `npx --yes seemyslop@0.1.0 artifacts --json`. Never guess from title alone. Omit `--id` when no reliable match exists.
 6. Create no mapping state by default. If durable continuity is useful, an agent may store it in `~/.config/seemyslop/shares.json`; never add mapping files to the project.
 7. Deploy with JSON output:
 
    ```bash
-   npx seemyslop deploy "$DEPLOY_DIR" --json --title "$TITLE" --message "$MESSAGE"
+   npx --yes seemyslop@0.1.0 deploy "$DEPLOY_DIR" --json --title "$TITLE" --message "$MESSAGE"
    ```
 
-   Add `--id "$ARTIFACT_ID"` only when the ID is reliable. For a staged raw file, add `--no-git-metadata`. If credentials are missing, run `npx seemyslop auth login`, hand the interactive token step to the user, and retry once.
+   Add `--id "$ARTIFACT_ID"` only when the ID is reliable. For a staged raw file, add `--no-git-metadata`. If credentials are missing, run `npx --yes seemyslop@0.1.0 auth login`, hand the interactive token step to the user, and retry once.
 
 8. Parse only a successful server response. Verify the current and immutable version URLs over HTTPS; for an app, also fetch its referenced JS/CSS. Do not claim a URL exists after failed deployment or verification.
 9. Return `currentUrl`, `versionUrl`, and the URL-encoded direct file path when the entry is not `index.html`. State when a reused ID advanced the current version.
