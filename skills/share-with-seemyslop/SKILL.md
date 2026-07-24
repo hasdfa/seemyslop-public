@@ -28,6 +28,7 @@ Publish requested files or static web output through `npx seemyslop`. SeeMySlop 
    ```
 
    Add `--id "$ARTIFACT_ID"` only when the ID is reliable. For a staged raw file, add `--no-git-metadata`. If credentials are missing, run `npx seemyslop auth login`, hand the interactive token step to the user, and retry once.
+
 8. Parse only a successful server response. Verify the current and immutable version URLs over HTTPS; for an app, also fetch its referenced JS/CSS. Do not claim a URL exists after failed deployment or verification.
 9. Return `currentUrl`, `versionUrl`, and the URL-encoded direct file path when the entry is not `index.html`. State when a reused ID advanced the current version.
 10. Remove temporary staging after the CLI finishes reading it.

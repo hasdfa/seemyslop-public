@@ -1,8 +1,8 @@
 interface:
-  display_name: "Share with SeeMySlop"
-  short_description: "Publish files and web previews instantly"
-  brand_color: "#7624F4"
-  default_prompt: "Use $share-with-seemyslop to publish this remotely and return a shareable URL."
+  display_name: 'Share with SeeMySlop'
+  short_description: 'Publish files and web previews instantly'
+  brand_color: '#7624F4'
+  default_prompt: 'Use $share-with-seemyslop to publish this remotely and return a shareable URL.'
 
 policy:
   allow_implicit_invocation: true
