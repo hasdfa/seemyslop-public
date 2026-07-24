@@ -31,7 +31,7 @@ Publish through `npx --yes seemyslop@0.1.0`. New shares are public; the CLI has 
    Add reliable `--id "$ARTIFACT_ID"` and raw-file `--no-git-metadata` when applicable. If credentials are missing, run `npx --yes seemyslop@0.1.0 auth login`, hand interaction to the user, and retry once.
 
 9. Parse only a successful server response and require HTTPS `currentUrl` and `versionUrl`. Verify public pages and referenced JS/CSS. After a password-protected update, make anonymous HTTPS requests to both URLs and require `401` password gates; otherwise verification fails. Hand actual password verification to the user without requesting, seeing, passing, or logging the password.
-10. For a raw file, download the direct immutable raw-file URL formed from `versionUrl` and the URL-encoded original filename, then compare it with the source bytes or SHA-256. Any byte or SHA-256 comparison mismatch means verification failed and forbids a success claim. For protected raw files, the user performs this authenticated comparison without exposing the password.
+10. For every non-`index.html` entry, construct and HTTPS-verify URL-encoded direct paths under `currentUrl` and `versionUrl`, and return both. For a raw file, download the immutable raw-file URL and compare it with source bytes or SHA-256. Any byte or SHA-256 comparison mismatch means verification failed and forbids a success claim. For protected raw files, the user performs this authenticated comparison without exposing the password.
 11. Return verified URLs, note stable-ID updates, and remove staging after the CLI finishes reading it.
 
 ## Constraints
